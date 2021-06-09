@@ -25,7 +25,8 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-white">ユーザー名（後でリンクで飛ばす）</a></li>
+          <li><a href="edit_user_path(user.id)" class="nav-link px-2 text-white">morita</a></li>
+          <%# <li><%= link_to "niku",  edit_user_path(user.id), method: :get, class: "nav-link px-2 text-white" %></li> 
           <li><a href="#" class="nav-link px-2 text-white">単語帳</a></li>
         </ul>
 
@@ -34,8 +35,16 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+         <% if user_signed_in? %>
+           
+          <button type="button" class="btn btn-outline-light me-2"> 
+          <%= link_to "Log-out", destroy_user_session_path, method: :delete, class: 'btn btn-warning'%></button>
+          <% else %>
+          <button type="button" class="btn btn-outline-light me-2">
+          <%= link_to "Login", user_session_path, method: :get, class: 'btn-outline-light me-2'%></button>
+          <button type="button" class="btn btn-warning me-2">
+          <%= link_to "Sign-up", new_user_registration_path, method: :get, class: 'btn btn-warning me-2'%></button>
+          <% end %>
         </div>
       </div>
     </div>
@@ -47,58 +56,49 @@
       <div class=" flex-shrink-0  " >
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
           <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-          <span class="fs-5 fw-semibold">Collapsible</span>
+          <span class="fs-5 fw-semibold">Vocabu lary Book
+            <span class="bt-menu justify-content-md-end">
+              <button class="btn btn-outline-light me-2" type="button">新規ファイル作成</button>
+              <button class="btn btn-outline-light me-2" type="button">編集</button>
+            </span>
+          </span>
         </a>
         <ul class="list-unstyled ps-0">
           <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              Home
+              ITパスポート
             </button>
             <div class="collapse show" id="home-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">Overview</a></li>
-                <li><a href="#" class="link-dark rounded">Updates</a></li>
-                <li><a href="#" class="link-dark rounded">Reports</a></li>
+                <li><a href="#" class="link-dark rounded">ストラテジ</a></li>
+                <li><a href="#" class="link-dark rounded">マネジメント</a></li>
+                <li><a href="#" class="link-dark rounded">テクノロジー</a></li>
               </ul>
             </div>
           </li>
           <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-              Dashboard
+              情報セキュリティマネジメント
             </button>
             <div class="collapse" id="dashboard-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class=" link-dark rounded">Overview</a></li>
-                <li><a href="#" class="link-dark rounded">Weekly</a></li>
-                <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                <li><a href="#" class="link-dark rounded">Annually</a></li>
+                <li><a href="#" class=" link-dark rounded">情報セキュリティ全般</a></li>
+                <li><a href="#" class="link-dark rounded">情報セキュリティ管理</a></li>
+                <li><a href="#" class="link-dark rounded">情報セキュリティ対策</a></li>
+                <li><a href="#" class="link-dark rounded">情報セキュリティ関連法規</a></li>
               </ul>
             </div>
           </li>
           <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-              Orders
+              TECH::MASTER
             </button>
             <div class="collapse" id="orders-collapse">
               <ul class=" btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded ">New</a></li>
-                <li><a href="#" class="link-dark rounded">Processed</a></li>
-                <li><a href="#" class="link-dark rounded">Shipped</a></li>
-                <li><a href="#" class="link-dark rounded">Returned</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="border-top my-3"></li>
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-              Account
-            </button>
-            <div class="collapse" id="account-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">New...</a></li>
-                <li><a href="#" class="link-dark rounded">Profile</a></li>
-                <li><a href="#" class="link-dark rounded">Settings</a></li>
-                <li><a href="#" class="link-dark rounded">Sign out</a></li>
+                <li><a href="#" class="link-dark rounded">HTML</a></li>
+                <li><a href="#" class="link-dark rounded">CSS</a></li>
+                <li><a href="#" class="link-dark rounded">Ruby</a></li>
+                <li><a href="#" class="link-dark rounded">Ruby on Rails</a></li>
               </ul>
             </div>
           </li>
@@ -106,10 +106,18 @@
       </div>
     </div>
 
-    <div class="col-9  bg-lite text-dark">
-      col-9
-    </div>
-    
+    <ul class="col-9  bg-lite text-dark">
+      <li class="mb-1">
+        <nav class="navbar navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">HTML</a>
+          </div>
+        </nav>
+      </li>
+      <li><a href="#" class="link-dark rounded">・要素</a></li>
+      <li><a href="#" class="link-dark rounded">・タグ</a></li>
+    </ul>
+
   </div>
     
   
